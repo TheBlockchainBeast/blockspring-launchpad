@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { SiSpring } from "react-icons/si";
+import Link from "next/link";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,10 +27,13 @@ export function Header() {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-bold flex items-center gap-2 dark:text-white text-gray-900">
+        <Link
+          href="/"
+          className="text-2xl font-bold flex items-center gap-2 dark:text-white text-gray-900"
+        >
           <SiSpring className="text-blue-500" />
           BlockSpring
-        </div>
+        </Link>
 
         {/* Mobile menu button */}
         <button
