@@ -14,9 +14,9 @@ export function SearchBar({
   return (
     <div className="flex items-center bg-white dark:bg-[#0A0A0A] border rounded-full p-1 max-w-[95%] sm:max-w-[600px] mx-auto">
       <div
-        className={`flex items-center flex-1 px-2 sm:px-4 ${
+        className={`flex items-center ${
           showFilter ? "hidden sm:flex" : "flex"
-        } min-w-0`}
+        } flex-1 px-2 sm:px-4 min-w-0`}
       >
         <svg
           className="w-5 h-5 text-gray-400"
@@ -40,7 +40,7 @@ export function SearchBar({
 
       <div
         className={`flex items-center px-2 sm:px-4 sm:border-l border-gray-200 dark:border-[#1C1C1C] ${
-          showFilter ? "flex-1" : ""
+          showFilter ? "flex-1 min-w-0" : ""
         }`}
       >
         <button
@@ -77,7 +77,7 @@ export function SearchBar({
         </select>
       </div>
 
-      <div className="relative group">
+      <div className="relative group shrink-0">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-200"></div>
         <button className="relative px-3 sm:px-6 py-2 sm:py-3 dark:bg-[#0A0A0A] bg-white rounded-full leading-none dark:text-white text-gray-900 text-sm sm:text-base">
           Search
