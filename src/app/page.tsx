@@ -109,10 +109,12 @@ export default function Home() {
   });
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
-      <Header />
+    <main className="min-h-screen">
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Header />
+      </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 mt-16">
         <SearchBar status={status} onStatusChange={setStatus} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
