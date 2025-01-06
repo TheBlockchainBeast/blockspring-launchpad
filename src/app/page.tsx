@@ -1,101 +1,126 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { ProjectCard } from "@/components/ProjectCard";
+import { SearchBar } from "@/components/SearchBar";
+import { Header } from "@/components/Header";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [status, setStatus] = useState("");
+  // Mock data - replace with actual data later
+  const projects = [
+    {
+      id: "1",
+      title: "Project Alpha",
+      description:
+        "Gen DeFi protocol for institutional clients.\nEnabling seamless transactions and yield optimization.",
+      status: "In Progress",
+      currentFunding: 150000,
+      fundingGoal: 200000,
+    },
+    {
+      id: "2",
+      title: "EcoChain",
+      description:
+        "Blockchain system for environmental tracking.\nMonitors emissions and validates sustainability.",
+      status: "Completed",
+      currentFunding: 500000,
+      fundingGoal: 500000,
+    },
+    {
+      id: "3",
+      title: "MetaVerse Hub",
+      description:
+        "Virtual reality social ecosystem for users.\nFeatures interactive experiences and digital commerce.",
+      status: "In Progress",
+      currentFunding: 750000,
+      fundingGoal: 2000000,
+    },
+    {
+      id: "4",
+      title: "DeFi Lending Protocol",
+      description:
+        "P2P lending platform with smart contracts.\nProvides transparent and efficient financial services.",
+      status: "In Progress",
+      currentFunding: 300000,
+      fundingGoal: 1000000,
+    },
+    {
+      id: "5",
+      title: "NFT Marketplace",
+      description:
+        "Premium platform for digital collectibles.\nFeatures curated artwork and integrated royalties.",
+      status: "Completed",
+      currentFunding: 400000,
+      fundingGoal: 400000,
+    },
+    {
+      id: "6",
+      title: "Smart City DAO",
+      description:
+        "Community-driven urban development system.\nImplements blockchain governance for infrastructure.",
+      status: "In Progress",
+      currentFunding: 1200000,
+      fundingGoal: 5000000,
+    },
+    {
+      id: "7",
+      title: "GameFi Platform",
+      description:
+        "Blockchain gaming ecosystem with rewards.\nEnables cross-game trading and asset ownership.",
+      status: "In Progress",
+      currentFunding: 800000,
+      fundingGoal: 1500000,
+    },
+    {
+      id: "8",
+      title: "Cross-Chain Bridge",
+      description:
+        "Multi-blockchain transfer solution.\nProvides secure bridging across major networks.",
+      status: "Completed",
+      currentFunding: 3000000,
+      fundingGoal: 3000000,
+    },
+    {
+      id: "9",
+      title: "DeSci Research",
+      description:
+        "Blockchain platform for scientific funding.\nFacilitates peer-reviewed research proposals.",
+      status: "In Progress",
+      currentFunding: 250000,
+      fundingGoal: 1000000,
+    },
+    {
+      id: "10",
+      title: "Web3 Social",
+      description:
+        "Decentralized social media platform.\nFeatures content monetization and data ownership.",
+      status: "In Progress",
+      currentFunding: 450000,
+      fundingGoal: 800000,
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const filteredProjects = projects.filter((project) => {
+    if (!status) return true;
+    return status === "completed"
+      ? project.status === "Completed"
+      : project.status === "In Progress";
+  });
+
+  return (
+    <main className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
+      <Header />
+
+      <div className="container mx-auto px-4 py-8">
+        <SearchBar status={status} onStatusChange={setStatus} />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }
