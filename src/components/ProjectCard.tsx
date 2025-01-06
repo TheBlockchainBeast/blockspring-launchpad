@@ -108,6 +108,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       </div>
+
+      {/* Funding progress section */}
+      <div className="mt-6">
+        <div className="flex justify-between text-sm mb-2">
+          <span className="text-gray-500 dark:text-gray-400">
+            ${project.currentFunding.toLocaleString()} raised
+          </span>
+          <span className="text-gray-500 dark:text-gray-400">
+            ${project.fundingGoal.toLocaleString()} goal
+          </span>
+        </div>
+        <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300"
+            style={{
+              width: `${Math.min(
+                (project.currentFunding / project.fundingGoal) * 100,
+                100
+              )}%`,
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
